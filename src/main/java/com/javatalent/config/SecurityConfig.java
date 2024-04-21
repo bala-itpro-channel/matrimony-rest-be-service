@@ -104,10 +104,10 @@ public class SecurityConfig {
                 addList("Bearer Authentication"))
             .components(new Components().addSecuritySchemes
                 ("Bearer Authentication", createAPIKeyScheme()))
-            .info(new Info().title("My REST API")
-                .description("Some custom description of API.")
-                .version("1.0").contact(new Contact().name("Sallo Szrajbman")
-                    .email( "www.baeldung.com").url("salloszraj@gmail.com"))
+            .info(new Info().title("Matrimony REST API")
+                .description("My matrimony REST BE Service")
+                .version("1.0").contact(new Contact().name("Bala G")
+                    .email( "www.bala.com").url("bala.in@gmail.com"))
                 .license(new License().name("License of API")
                     .url("API license URL")));
     }
