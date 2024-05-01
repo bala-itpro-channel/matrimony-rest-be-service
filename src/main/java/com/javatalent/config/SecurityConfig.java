@@ -50,6 +50,7 @@ public class SecurityConfig {
                         		"/auth/welcome", 
                         		"/auth/addNewUser", 
                         		"/auth/generateToken",
+                        		"/api/**",
                         		"/api/v1/auth/**",
                         		"/v2/api-docs",
                         		"/v3/api-docs",
@@ -70,14 +71,14 @@ public class SecurityConfig {
                 .authenticationProvider(authenticationProvider())
                 .addFilterBefore(authFilter, UsernamePasswordAuthenticationFilter.class)
                 .build(); 
-    } 
-  
+    }
+    
     // Password Encoding 
     @Bean
     public PasswordEncoder passwordEncoder() { 
         return new BCryptPasswordEncoder(); 
     } 
-  
+    
     @Bean
     public AuthenticationProvider authenticationProvider() { 
         DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider(); 
@@ -85,7 +86,7 @@ public class SecurityConfig {
         authenticationProvider.setPasswordEncoder(passwordEncoder()); 
         return authenticationProvider; 
     } 
-  
+    
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception { 
         return config.getAuthenticationManager(); 

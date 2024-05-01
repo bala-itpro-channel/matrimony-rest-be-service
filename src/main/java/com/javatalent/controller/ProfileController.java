@@ -6,7 +6,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,7 +20,7 @@ import com.javatalent.repo.ProfileRepository;
 import com.javatalent.exception.ResourceNotFoundException;
 @RestController
 @RequestMapping("/api")
-@PreAuthorize("hasAuthority('ROLE_ADMIN')") 
+//@PreAuthorize("hasAuthority('ROLE_ADMIN')") 
 public class ProfileController {
 	@Autowired
 	ProfileRepository repo;
@@ -45,8 +44,7 @@ public class ProfileController {
 		}
 	}
 	
-	@GetMapping("/profiles")
-	@PreAuthorize("hasAuthority('ROLE_USER')") 
+	@GetMapping("/profiles") 
 	public List<Profile> getAllProfiles() {
 		return repo.findAll();
 	}
@@ -78,7 +76,6 @@ public class ProfileController {
 		Profile profile = repo.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("Profile", "id", id));
 		
-		profile.setAge(profileObj.getAge());
 		profile.setEducation(profileObj.getEducation());
 		profile.setName(profileObj.getName());
 		

@@ -21,6 +21,7 @@ public class UserInfo {
     private String email; 
     private String password; 
     private String roles;
+    
 	public String getName() {
 		return name;
 	}

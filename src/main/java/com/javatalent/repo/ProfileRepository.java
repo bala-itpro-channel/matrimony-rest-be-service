@@ -9,7 +9,7 @@ import com.javatalent.entity.Profile;
 
 
 public interface ProfileRepository extends JpaRepository<Profile, Integer> {
-	List<Profile> findByAge(Integer age);
+	// List<Profile> findByAge(Integer age);
 	List<Profile> findByNameContaining(String name);
 	
 	//Native SQL (Table name profile)
@@ -17,7 +17,7 @@ public interface ProfileRepository extends JpaRepository<Profile, Integer> {
 	public List<Profile> getProfilesNativeSql();
 	
 	//JPQL (Entity class Name Profile)
-	@Query("select p from Profile p where p.age > 40")
+	@Query("select p from Profile p where p.profileId > 1")
 	public List<Profile> getProfilesNativeSql1();
 	
 //	@Query(nativeQuery = true, value = "select profile_id, name, age, education from profile")
