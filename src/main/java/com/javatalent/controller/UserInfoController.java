@@ -18,17 +18,34 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.javatalent.entity.UserInfo;
 import com.javatalent.repo.UserInfoRepository;
+import com.javatalent.service.UserInfoService;
 import com.javatalent.exception.ResourceNotFoundException;
 @RestController
 @RequestMapping("/api")
 //@PreAuthorize("hasAuthority('ROLE_ADMIN')") 
 public class UserInfoController {
 	@Autowired
+    private UserInfoService service; 
+	
+	@Autowired
 	UserInfoRepository repo;
 	
 	@GetMapping("/users")
-	@PreAuthorize("hasAuthority('ROLE_USER')") 
 	public List<UserInfo> getAllUsers() {
 		return repo.findAll();
 	}
+	
+	@GetMapping("/users/{id}")
+	// @RequestMapping(path = "/mno/objectKey/{id}/{name}", method = RequestMethod.GET)
+	public UserInfo getUserById(@PathVariable long id) {
+		return service.getListById(id);
+	}	
+	
+	@GetMapping("/users/{pagesize}/{pagenumber}")
+	// @RequestMapping(path = "/mno/objectKey/{id}/{name}", method = RequestMethod.GET)
+	public List<UserInfo> getUserWithPagination(@PathVariable int pagesize, @PathVariable int pagenumber) {
+		return service.getListWithPagination(pagesize, pagenumber);
+	}	
+	
+	
 }

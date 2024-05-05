@@ -1,5 +1,6 @@
 package com.javatalent.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,5 +38,16 @@ public class UserInfoService implements UserDetailsService {
         repository.save(userInfo); 
         return "User Added Successfully"; 
     } 
+    
+    public UserInfo getListById(long id) { 
+        return repository.findById(id);
+    } 
+    
+    public List<UserInfo> getListWithPagination(int pagesize, int pagenumber) {
+    	int offset = (pagenumber - 1) * pagesize;
+        return repository.findAllWithPagination(offset, pagesize);
+    } 
+    
+    
   
 } 

@@ -24,6 +24,65 @@ public class UserInfo {
     private String email; 
     private String password; 
     private String firstName;
+	private String roles;
+	
+	@Column
+	private String onBehalfOf;
+	
+	@Column
+	@NotEmpty
+	@Size(max=50,message = "Education must be max of 50 characters")
+	// @JsonProperty(access = Access.WRITE_ONLY)
+	private String education;
+	
+	@Column
+	private String gender;
+	
+	@Column
+	private String fatherName;
+	
+	@Column
+	private String motherName;
+	
+	@Column
+	private String dob;
+	
+	@Column
+	private String job;
+	
+	@Column
+	private int income;
+	
+	@Column
+	private String houseName;
+	
+	@Column
+	private String branch;
+	@Column
+	private String temple;
+	
+	@Column
+	private String femaleGod;
+	@Column
+	private String star;
+	@Column
+	private String zodiac;
+	@Column
+	private String nativePlace;
+	@Column
+	private String currentPlace;
+
+	@Column
+	private String dosham;
+	@Column
+	private String marritalStatus;
+	@Column
+	private String height;
+	@Column
+	private String details;
+	@Column
+	private String mobile;
+    
 	public String getOnBehalfOf() {
 		return onBehalfOf;
 	}
@@ -144,65 +203,6 @@ public class UserInfo {
 	public void setMobile(String mobile) {
 		this.mobile = mobile;
 	}
-	private String roles;
-	
-	@Column
-	private String onBehalfOf;
-	
-	@Column
-	@NotEmpty
-	@Size(max=50,message = "Education must be max of 50 characters")
-	// @JsonProperty(access = Access.WRITE_ONLY)
-	private String education;
-	
-	@Column
-	private String gender;
-	
-	@Column
-	private String fatherName;
-	
-	@Column
-	private String motherName;
-	
-	@Column
-	private String dob;
-	
-	@Column
-	private String job;
-	
-	@Column
-	private int income;
-	
-	@Column
-	private String houseName;
-	
-	@Column
-	private String branch;
-	@Column
-	private String temple;
-	
-	@Column
-	private String femaleGod;
-	@Column
-	private String star;
-	@Column
-	private String zodiac;
-	@Column
-	private String nativePlace;
-	@Column
-	private String currentPlace;
-
-	@Column
-	private String dosham;
-	@Column
-	private String marritalStatus;
-	@Column
-	private String height;
-	@Column
-	private String details;
-	@Column
-	private String mobile;
-    
 	public String getName() {
 		return name;
 	}
