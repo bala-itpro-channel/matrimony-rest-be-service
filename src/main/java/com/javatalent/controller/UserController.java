@@ -1,5 +1,7 @@
 package com.javatalent.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -14,13 +16,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.javatalent.entity.AuthRequest;
 import com.javatalent.entity.UserInfo;
+import com.javatalent.repo.UserInfoRepository;
 import com.javatalent.service.JwtService;
 import com.javatalent.service.UserInfoService;
 
 @RestController
 @RequestMapping("/auth") 
 public class UserController { 
-  
+	
     @Autowired
     private UserInfoService service; 
   
@@ -30,26 +33,10 @@ public class UserController {
     @Autowired
     private AuthenticationManager authenticationManager; 
   
-    @GetMapping("/welcome") 
-    public String welcome() { 
-        return "Welcome this endpoint is not secure"; 
-    } 
-  
     @PostMapping("/addNewUser") 
     public String addNewUser(@RequestBody UserInfo userInfo) { 
         return service.addUser(userInfo); 
-    } 
-  
-    @GetMapping("/user/userProfile") 
-    @PreAuthorize("hasAuthority('ROLE_USER')") 
-    public String userProfile() { 
-        return "Welcome to User Profile"; 
-    } 
-  
-    @GetMapping("/admin/adminProfile")  
-    public String adminProfile() { 
-        return "Welcome to Admin Profile"; 
-    } 
+    }
   
     @PostMapping("/generateToken") 
     public String authenticateAndGetToken(@RequestBody AuthRequest authRequest) { 

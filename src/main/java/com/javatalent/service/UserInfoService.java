@@ -20,7 +20,7 @@ public class UserInfoService implements UserDetailsService {
     private UserInfoRepository repository; 
   
     @Autowired
-    private PasswordEncoder encoder; 
+    private PasswordEncoder encoder;
   
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException { 
