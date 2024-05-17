@@ -8,6 +8,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,12 +17,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.javatalent.entity.AuthRequest;
 import com.javatalent.entity.UserInfo;
-import com.javatalent.repo.UserInfoRepository;
 import com.javatalent.service.JwtService;
 import com.javatalent.service.UserInfoService;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/auth") 
+
 public class UserController { 
 	
     @Autowired
@@ -33,9 +35,11 @@ public class UserController {
     @Autowired
     private AuthenticationManager authenticationManager; 
   
+    // @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping("/addNewUser") 
-    public String addNewUser(@RequestBody UserInfo userInfo) { 
-        return service.addUser(userInfo); 
+    public UserInfo addNewUser(@RequestBody UserInfo userInfo) { 
+    	UserInfo op = service.addUser(userInfo);
+        return op; 
     }
   
     @PostMapping("/generateToken") 

@@ -39,7 +39,7 @@ public class UserInfoController {
 	// @RequestMapping(path = "/mno/objectKey/{id}/{name}", method = RequestMethod.GET)
 	public UserInfo getUserById(@PathVariable long id) {
 		return service.getListById(id);
-	}	
+	}
 	
 	@GetMapping("/users/{pagesize}/{pagenumber}")
 	// @RequestMapping(path = "/mno/objectKey/{id}/{name}", method = RequestMethod.GET)
