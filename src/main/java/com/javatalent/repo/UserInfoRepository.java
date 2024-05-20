@@ -24,6 +24,10 @@ public interface UserInfoRepository extends JpaRepository<UserInfo, Integer> {
     @Query("SELECT u FROM UserInfo u WHERE u.id = (:id)")
     UserInfo findById(@Param("id") long id);
     
+    //Find by gender
+    //Find by Age
+    //Find by Location
+    
     @Query(value="SELECT * FROM UserInfo u limit :pagesize offset :offset", nativeQuery = true)
     List<UserInfo> findAllWithPagination(@Param("offset") int offset, @Param("pagesize") int pagesize);
 }

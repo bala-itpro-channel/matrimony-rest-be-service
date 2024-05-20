@@ -4,6 +4,9 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -45,8 +48,11 @@ public class UserInfoService implements UserDetailsService {
     public List<UserInfo> getListWithPagination(int pagesize, int pagenumber) {
     	int offset = (pagenumber - 1) * pagesize;
         return repository.findAllWithPagination(offset, pagesize);
-    } 
+    }
     
-    
+    public Page<UserInfo> getProfileWithPaginationAndSorting(int pageSize, int offset, String field){
+        Page<UserInfo> products = repository.findAll(PageRequest.of(offset, pageSize).withSort(Sort.by(field)));
+        return  products;
+    }
   
 } 

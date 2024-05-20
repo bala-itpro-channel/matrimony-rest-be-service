@@ -38,6 +38,39 @@ public class UserInfo {
 	@Column
 	private String gender;
 	
+	public UserInfo(String name, String email, String password, String firstName, String roles, String onBehalfOf,
+			@NotEmpty @Size(max = 50, message = "Education must be max of 50 characters") String education,
+			String gender, String fatherName, String motherName, String dob, String job, int income, String houseName,
+			String branch, String temple, String femaleGod, String star, String zodiac, String nativePlace,
+			String currentPlace, String dosham, String marritalStatus, String height, String details, String mobile) {
+		super();
+		this.name = name;
+		this.email = email;
+		this.password = password;
+		this.firstName = firstName;
+		this.roles = roles;
+		this.onBehalfOf = onBehalfOf;
+		this.education = education;
+		this.gender = gender;
+		this.fatherName = fatherName;
+		this.motherName = motherName;
+		this.dob = dob;
+		this.job = job;
+		this.income = income;
+		this.houseName = houseName;
+		this.branch = branch;
+		this.temple = temple;
+		this.femaleGod = femaleGod;
+		this.star = star;
+		this.zodiac = zodiac;
+		this.nativePlace = nativePlace;
+		this.currentPlace = currentPlace;
+		this.dosham = dosham;
+		this.marritalStatus = marritalStatus;
+		this.height = height;
+		this.details = details;
+		this.mobile = mobile;
+	}
 	@Column
 	private String fatherName;
 	

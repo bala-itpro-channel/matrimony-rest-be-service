@@ -24,10 +24,10 @@ import com.javatalent.service.UserInfoService;
 @RestController
 @RequestMapping("/auth") 
 
-public class UserController { 
+public class UserController {
 	
     @Autowired
-    private UserInfoService service; 
+    private UserInfoService service;
   
     @Autowired
     private JwtService jwtService; 
@@ -46,7 +46,7 @@ public class UserController {
     public String authenticateAndGetToken(@RequestBody AuthRequest authRequest) { 
         Authentication authentication = authenticationManager
         		.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getUsername(), 
-        				authRequest.getPassword())); 
+        				authRequest.getPassword()));
         if (authentication.isAuthenticated()) { 
             return jwtService.generateToken(authRequest.getUsername()); 
         } else { 
