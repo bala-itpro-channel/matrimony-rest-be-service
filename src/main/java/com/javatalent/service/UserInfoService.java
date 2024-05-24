@@ -1,5 +1,7 @@
 package com.javatalent.service;
 
+import java.io.IOException;
+import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,6 +14,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.javatalent.entity.UserInfo;
 import com.javatalent.entity.UserInfoDetails;
@@ -36,8 +39,12 @@ public class UserInfoService implements UserDetailsService {
                 .orElseThrow(() -> new UsernameNotFoundException("User not found " + username)); 
     } 
   
-    public UserInfo addUser(UserInfo userInfo) { 
+    public UserInfo addUser(UserInfo userInfo, MultipartFile file) throws IOException {
         userInfo.setPassword(encoder.encode(userInfo.getPassword())); 
+        // userInfo.setImage(Base64.getEncoder().encodeToString(file.getBytes()));
+        if (file != null) {
+            userInfo.setImage(Base64.getEncoder().encodeToString(file.getBytes()));	
+        }
         return repository.save(userInfo); 
     } 
     

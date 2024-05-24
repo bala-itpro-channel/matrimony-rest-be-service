@@ -1,10 +1,13 @@
 package com.javatalent.entity;
 
+import java.util.Date;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -16,10 +19,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserInfo { 
-  
-    @Id
+	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) 
-    private int id; 
+    private int id;
     private String name; 
     private String email; 
     private String password; 
@@ -38,39 +40,6 @@ public class UserInfo {
 	@Column
 	private String gender;
 	
-	public UserInfo(String name, String email, String password, String firstName, String roles, String onBehalfOf,
-			@NotEmpty @Size(max = 50, message = "Education must be max of 50 characters") String education,
-			String gender, String fatherName, String motherName, String dob, String job, int income, String houseName,
-			String branch, String temple, String femaleGod, String star, String zodiac, String nativePlace,
-			String currentPlace, String dosham, String marritalStatus, String height, String details, String mobile) {
-		super();
-		this.name = name;
-		this.email = email;
-		this.password = password;
-		this.firstName = firstName;
-		this.roles = roles;
-		this.onBehalfOf = onBehalfOf;
-		this.education = education;
-		this.gender = gender;
-		this.fatherName = fatherName;
-		this.motherName = motherName;
-		this.dob = dob;
-		this.job = job;
-		this.income = income;
-		this.houseName = houseName;
-		this.branch = branch;
-		this.temple = temple;
-		this.femaleGod = femaleGod;
-		this.star = star;
-		this.zodiac = zodiac;
-		this.nativePlace = nativePlace;
-		this.currentPlace = currentPlace;
-		this.dosham = dosham;
-		this.marritalStatus = marritalStatus;
-		this.height = height;
-		this.details = details;
-		this.mobile = mobile;
-	}
 	@Column
 	private String fatherName;
 	
@@ -112,10 +81,89 @@ public class UserInfo {
 	@Column
 	private String height;
 	@Column
+	@Size(max=1500,message = "Details must be max of 1500 characters")
 	private String details;
 	@Column
 	private String mobile;
+	
+	@Column
+	private Date createdDate;
     
+	@Column
+	private Date modifiedDate;
+	
+	@Lob
+    @Column(columnDefinition = "MEDIUMBLOB")
+    private String image;
+	
+    public UserInfo(String name, String email, String password, String firstName, String roles, String onBehalfOf,
+			@NotEmpty @Size(max = 50, message = "Education must be max of 50 characters") String education,
+			String gender, String fatherName, String motherName, String dob, String job, int income, String houseName,
+			String branch, String temple, String femaleGod, String star, String zodiac, String nativePlace,
+			String currentPlace, String dosham, String marritalStatus, String height,
+			@Size(max = 1500, message = "Details must be max of 1500 characters") String details, String mobile,
+			Date createdDate, Date modifiedDate, String image) {
+		super();
+		this.name = name;
+		this.email = email;
+		this.password = password;
+		this.firstName = firstName;
+		this.roles = roles;
+		this.onBehalfOf = onBehalfOf;
+		this.education = education;
+		this.gender = gender;
+		this.fatherName = fatherName;
+		this.motherName = motherName;
+		this.dob = dob;
+		this.job = job;
+		this.income = income;
+		this.houseName = houseName;
+		this.branch = branch;
+		this.temple = temple;
+		this.femaleGod = femaleGod;
+		this.star = star;
+		this.zodiac = zodiac;
+		this.nativePlace = nativePlace;
+		this.currentPlace = currentPlace;
+		this.dosham = dosham;
+		this.marritalStatus = marritalStatus;
+		this.height = height;
+		this.details = details;
+		this.mobile = mobile;
+		this.createdDate = createdDate;
+		this.modifiedDate = modifiedDate;
+		this.image = image;
+	}
+
+	public String getImage() {
+		return image;
+	}
+
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+
+
+	public void setCreatedDate(Date createdDate) {
+		this.createdDate = createdDate;
+	}
+
+
+	public void setModifiedDate(Date modifiedDate) {
+		this.modifiedDate = modifiedDate;
+	}
+
+
+	public Date getCreatedDate() {
+		return createdDate;
+	}
+
+	public Date getModifiedDate() {
+		return modifiedDate;
+	}
+
+
 	public String getOnBehalfOf() {
 		return onBehalfOf;
 	}
