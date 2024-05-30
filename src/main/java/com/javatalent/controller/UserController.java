@@ -6,9 +6,11 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -34,12 +36,24 @@ public class UserController {
     @Autowired
     private AuthenticationManager authenticationManager; 
   
-    @PostMapping("/addNewUser") 
-    public UserInfo addNewUser(@RequestBody UserInfo userInfo, MultipartFile file) throws IOException { 
+    @PostMapping("/addNewUserWithImage") 
+    public UserInfo addNewUser(@ModelAttribute UserInfo userInfo, @RequestParam("imageFile") MultipartFile imageFile) throws IOException { 
     	UserInfo op = null;
 		try {
-			op = service.addUser(userInfo, file);
+			op = service.addUserWithImage(userInfo, imageFile);
 		} catch (java.io.IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        return op;
+    }
+    
+    @PostMapping("/addNewUser") 
+    public UserInfo addNewUser(@RequestBody UserInfo userInfo) throws IOException { 
+    	UserInfo op = null;
+		try {
+			op = service.addUser(userInfo);
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
