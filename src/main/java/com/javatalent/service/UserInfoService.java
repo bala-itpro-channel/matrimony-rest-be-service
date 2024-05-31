@@ -80,6 +80,10 @@ public class UserInfoService implements UserDetailsService {
         return repository.findAllWithPagination(offset, pagesize);
     }
     
+    public List<UserInfo> getListByFirstNameAndGender(String firstName, String gender) {
+        return repository.findByFirstNameAndGender(firstName, gender);
+    }
+    
     public Page<UserInfo> getProfileWithPaginationAndSorting(int pageSize, int offset, String field){
         Page<UserInfo> products = repository.findAll(PageRequest.of(offset, pageSize).withSort(Sort.by(field)));
         return  products;

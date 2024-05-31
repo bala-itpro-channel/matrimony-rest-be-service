@@ -45,15 +45,18 @@ public class UserInfoController {
 	}
 	
 	@GetMapping("/users/{id}")
-	// @RequestMapping(path = "/mno/objectKey/{id}/{name}", method = RequestMethod.GET)
 	public UserInfo getUserById(@PathVariable long id) {
 		return service.getListById(id);
 	}
 	
 	@GetMapping("/users/{pagesize}/{pagenumber}")
-	// @RequestMapping(path = "/mno/objectKey/{id}/{name}", method = RequestMethod.GET)
 	public List<UserInfo> getUserWithPagination(@PathVariable int pagesize, @PathVariable int pagenumber) {
 		return service.getListWithPagination(pagesize, pagenumber);
+	}
+	
+	@GetMapping("/userslist/{name}/{gender}")
+	public List<UserInfo> getListByFirstNameAndGender(@PathVariable String name, @PathVariable String gender) {
+		return service.getListByFirstNameAndGender(name, gender);
 	}
 
 	@GetMapping("/users/{pagesize}/{pagenumber}/{sortField}")

@@ -21,6 +21,8 @@ public interface UserInfoRepository extends JpaRepository<UserInfo, Integer> {
 
     List<UserInfo> findOneByFirstName(String lastName);
     
+    List<UserInfo> findByFirstNameAndGender(String firstName, String gender); 
+    
     @Query("SELECT u FROM UserInfo u WHERE u.id = (:id)")
     UserInfo findById(@Param("id") long id);
     
