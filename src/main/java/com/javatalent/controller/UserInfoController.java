@@ -64,45 +64,45 @@ public class UserInfoController {
 		return service.getProfileWithPaginationAndSorting(pagesize, pagenumber, sortField);
 	}
 
-    @PostMapping("/upload/{id}") 
-    public UserInfo upload(@PathVariable int id,  @RequestParam("imageFile") MultipartFile imageFile) { 
-    	UserInfo op = null;
-		try {
-			op = service.uploadImage(id, imageFile);
-		} catch (java.io.IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-        return op;
-    }
+//    @PostMapping("/upload/{id}") 
+//    public UserInfo upload(@PathVariable int id,  @RequestParam("imageFile") MultipartFile imageFile) { 
+//    	UserInfo op = null;
+//		try {
+//			op = service.uploadImage(id, imageFile);
+//		} catch (java.io.IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//        return op;
+//    }
     
-    // Option 2 to upload Image
-    @PostMapping("/uploadnew") 
-    public UserInfo uploadNew(@RequestParam("id") int id,  @RequestParam("imageFile") MultipartFile imageFile) { 
-    	UserInfo op = null;
-    	System.out.println("***************************************");
-		try {
-			op = service.uploadImage(id, imageFile);
-		} catch (java.io.IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-        return op;
-    }
+//    // Option 2 to upload Image
+//    @PostMapping("/uploadnew") 
+//    public UserInfo uploadNew(@RequestParam("id") int id,  @RequestParam("imageFile") MultipartFile imageFile) { 
+//    	UserInfo op = null;
+//    	System.out.println("***************************************");
+//		try {
+//			op = service.uploadImage(id, imageFile);
+//		} catch (java.io.IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//        return op;
+//    }
     
-    @GetMapping(value = "/image/{id}")
-    public ResponseEntity<byte[]> getUserImage(@PathVariable int id) { 
-        byte[] imageBytes = null;
-		try {
-			imageBytes = service.getImage(id);
-		} catch (java.io.IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.IMAGE_JPEG);
-        
-        return new ResponseEntity<>(imageBytes, headers, HttpStatus.OK); 
-    }
+//    @GetMapping(value = "/image/{id}")
+//    public ResponseEntity<byte[]> getUserImage(@PathVariable int id) { 
+//        byte[] imageBytes = null;
+//		try {
+//			imageBytes = service.getImage(id);
+//		} catch (java.io.IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//        HttpHeaders headers = new HttpHeaders();
+//        headers.setContentType(MediaType.IMAGE_JPEG);
+//        
+//        return new ResponseEntity<>(imageBytes, headers, HttpStatus.OK); 
+//    }
 
 }

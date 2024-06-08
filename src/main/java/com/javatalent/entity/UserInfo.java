@@ -92,17 +92,14 @@ public class UserInfo {
 	@Column
 	private Date modifiedDate;
 	
-	@Lob
-    @Column(columnDefinition = "MEDIUMBLOB")
-    private byte[] image;
 	
-    public UserInfo(String name, String email, String password, String firstName, String roles, String onBehalfOf,
+    public UserInfo(String username, String email, String password, String firstName, String roles, String onBehalfOf,
 			@NotEmpty @Size(max = 50, message = "Education must be max of 50 characters") String education,
 			String gender, String fatherName, String motherName, String dob, String job, int income, String houseName,
 			String branch, String temple, String femaleGod, String star, String zodiac, String nativePlace,
 			String currentPlace, String dosham, String marritalStatus, String height,
 			@Size(max = 1500, message = "Details must be max of 1500 characters") String details, String mobile,
-			Date createdDate, Date modifiedDate, byte[] image) {
+			Date createdDate, Date modifiedDate) {
 		super();
 		this.name = name;
 		this.email = email;
@@ -132,16 +129,6 @@ public class UserInfo {
 		this.mobile = mobile;
 		this.createdDate = createdDate;
 		this.modifiedDate = modifiedDate;
-		this.image = image;
-	}
-
-	public byte[] getImage() {
-		return image;
-	}
-
-
-	public void setImage(byte[] image) {
-		this.image = image;
 	}
 
 

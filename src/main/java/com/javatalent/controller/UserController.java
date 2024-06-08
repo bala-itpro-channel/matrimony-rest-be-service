@@ -36,17 +36,17 @@ public class UserController {
     @Autowired
     private AuthenticationManager authenticationManager; 
   
-    @PostMapping("/addNewUserWithImage") 
-    public UserInfo addNewUser(@ModelAttribute UserInfo userInfo, @RequestParam("imageFile") MultipartFile imageFile) throws IOException { 
-    	UserInfo op = null;
-		try {
-			op = service.addUserWithImage(userInfo, imageFile);
-		} catch (java.io.IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-        return op;
-    }
+//    @PostMapping("/addNewUserWithImage") 
+//    public UserInfo addNewUser(@ModelAttribute UserInfo userInfo, @RequestParam("imageFile") MultipartFile imageFile) throws IOException { 
+//    	UserInfo op = null;
+//		try {
+//			op = service.addUserWithImage(userInfo, imageFile);
+//		} catch (java.io.IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//        return op;
+//    }
     
     @PostMapping("/addNewUser") 
     public UserInfo addNewUser(@RequestBody UserInfo userInfo) throws IOException { 

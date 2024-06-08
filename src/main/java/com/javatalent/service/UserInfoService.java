@@ -40,29 +40,29 @@ public class UserInfoService implements UserDetailsService {
                 .orElseThrow(() -> new UsernameNotFoundException("User not found " + username)); 
     } 
   
-    public UserInfo addUserWithImage(UserInfo userInfo, MultipartFile file) throws IOException {
-        userInfo.setPassword(encoder.encode(userInfo.getPassword())); 
-        // userInfo.setImage(Base64.getEncoder().encodeToString(file.getBytes()));
-        if (file != null) {
-            userInfo.setImage(ImageUtils.compressImage(file.getBytes()));
-        }
-        return repository.save(userInfo); 
-    }
+//    public UserInfo addUserWithImage(UserInfo userInfo, MultipartFile file) throws IOException {
+//        userInfo.setPassword(encoder.encode(userInfo.getPassword())); 
+//        // userInfo.setImage(Base64.getEncoder().encodeToString(file.getBytes()));
+//        if (file != null) {
+//            userInfo.setImage(ImageUtils.compressImage(file.getBytes()));
+//        }
+//        return repository.save(userInfo); 
+//    }
     
-    public UserInfo uploadImage(int id, MultipartFile file) throws IOException {
-    	UserInfo userInfo = repository.findById(id);
-        if (file != null) {
-        	userInfo.setImage(ImageUtils.compressImage(file.getBytes()));
-        }
-        return repository.save(userInfo); 
-    }
-
-    public byte[] getImage(int id) throws IOException {
-    	UserInfo userInfo = repository.findById(id);
-    	byte[] imageBytes = ImageUtils.decompressImage(userInfo.getImage()); // java.util.Base64.getDecoder().decode(userInfo.getImage());
-        
-    	return imageBytes; 
-    }
+//    public UserInfo uploadImage(int id, MultipartFile file) throws IOException {
+//    	UserInfo userInfo = repository.findById(id);
+//        if (file != null) {
+//        	userInfo.setImage(ImageUtils.compressImage(file.getBytes()));
+//        }
+//        return repository.save(userInfo); 
+//    }
+//
+//    public byte[] getImage(int id) throws IOException {
+//    	UserInfo userInfo = repository.findById(id);
+//    	byte[] imageBytes = ImageUtils.decompressImage(userInfo.getImage()); // java.util.Base64.getDecoder().decode(userInfo.getImage());
+//        
+//    	return imageBytes; 
+//    }
     
     public UserInfo addUser(UserInfo userInfo) {
         userInfo.setPassword(encoder.encode(userInfo.getPassword())); 
