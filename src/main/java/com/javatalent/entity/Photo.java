@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Data
-public class Photos { 
+public class Photo { 
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "photo_id")
@@ -29,17 +29,15 @@ public class Photos {
 	@Column(name = "is_primary")
 	private boolean isPrimary;
 	
-	public Photos(int photoId, byte[] image, boolean isPrimary) {
-		super();
-		this.image = image;
-		this.isPrimary = isPrimary;
+	public Photo() {
 	}
-
-	public Photos(byte[] image, boolean isPrimary) { 
+	
+	public Photo(byte[] image, boolean isPrimary) { 
 		super(); 
 		this.image = image;
 		this.isPrimary = isPrimary; 
 	}
+	
 	 /* 
 	 * public Photos(int photoId, byte[] image, boolean isPrimary) { super();
 	 * this.photoId = photoId; this.image = image; this.isPrimary = isPrimary; }

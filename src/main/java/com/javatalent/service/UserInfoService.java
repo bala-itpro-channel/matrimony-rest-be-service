@@ -1,9 +1,12 @@
 package com.javatalent.service;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Base64;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -16,6 +19,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.javatalent.entity.Photo;
 import com.javatalent.entity.UserInfo;
 import com.javatalent.entity.UserInfoDetails;
 import com.javatalent.repo.UserInfoRepository;
@@ -49,6 +53,23 @@ public class UserInfoService implements UserDetailsService {
 //        return repository.save(userInfo); 
 //    }
     
+    public UserInfo uploadImage(int id, MultipartFile file) throws IOException {
+    	UserInfo userInfo = repository.findById(id);
+        if (file != null) {
+        	Set<Photo> photos = new HashSet<>(Arrays.asList(new Photo(ImageUtils.compressImage(file.getBytes()), true)));
+        	userInfo.setPhotos(photos);
+        	// userInfo.setImage(ImageUtils.compressImage(file.getBytes()));
+        }
+        return repository.save(userInfo); 
+    }
+    
+//    public UserInfo uploadImage(int id, MultipartFile file) throws IOException {
+//    	UserInfo userInfo = repository.findById(id);
+//        if (file != null) {
+//        	// userInfo.setImage(ImageUtils.compressImage(file.getBytes()));
+//        }
+//        return repository.save(userInfo); 
+//    }
 //    public UserInfo uploadImage(int id, MultipartFile file) throws IOException {
 //    	UserInfo userInfo = repository.findById(id);
 //        if (file != null) {
@@ -66,8 +87,10 @@ public class UserInfoService implements UserDetailsService {
     
     public UserInfo addUser(UserInfo userInfo) {
         userInfo.setPassword(encoder.encode(userInfo.getPassword())); 
+        userInfo.setPhotos(null);
         UserInfo usinfo = repository.save(userInfo);
-        
+        System.out.print("*******************************************");
+        System.out.print(usinfo.id);
         return usinfo;
     } 
     

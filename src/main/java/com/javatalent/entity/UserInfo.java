@@ -1,13 +1,18 @@
 package com.javatalent.entity;
 
 import java.util.Date;
+import java.util.List;
+import java.util.Set;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Lob;
+import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -20,23 +25,35 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class UserInfo { 
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) 
-    private int id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	public int id;
     private String name; 
     private String email; 
     private String password; 
     private String firstName;
-	private String roles;
+	private String roles; 
 	
 	@Column
 	private String onBehalfOf;
 	
 	@Column
 	@NotEmpty
-	@Size(max=50,message = "Education must be max of 50 characters")
+	 @Size(max=50,message = "Education must be max of 50 characters")
 	// @JsonProperty(access = Access.WRITE_ONLY)
 	private String education;
 	
+	@OneToMany(cascade=CascadeType.ALL)
+	//To avoid Intermediate table use Join Column
+	@JoinColumn(name="user_id")
+	private Set<Photo> photos;
+	
+	public Set<Photo> getPhotos() {
+		return photos;
+	}
+
+	public void setPhotos(Set<Photo> photos) {
+		this.photos = photos;
+	}
 	@Column
 	private String gender;
 	
@@ -93,44 +110,44 @@ public class UserInfo {
 	private Date modifiedDate;
 	
 	
-    public UserInfo(String username, String email, String password, String firstName, String roles, String onBehalfOf,
-			@NotEmpty @Size(max = 50, message = "Education must be max of 50 characters") String education,
-			String gender, String fatherName, String motherName, String dob, String job, int income, String houseName,
-			String branch, String temple, String femaleGod, String star, String zodiac, String nativePlace,
-			String currentPlace, String dosham, String marritalStatus, String height,
-			@Size(max = 1500, message = "Details must be max of 1500 characters") String details, String mobile,
-			Date createdDate, Date modifiedDate) {
-		super();
-		this.name = name;
-		this.email = email;
-		this.password = password;
-		this.firstName = firstName;
-		this.roles = roles;
-		this.onBehalfOf = onBehalfOf;
-		this.education = education;
-		this.gender = gender;
-		this.fatherName = fatherName;
-		this.motherName = motherName;
-		this.dob = dob;
-		this.job = job;
-		this.income = income;
-		this.houseName = houseName;
-		this.branch = branch;
-		this.temple = temple;
-		this.femaleGod = femaleGod;
-		this.star = star;
-		this.zodiac = zodiac;
-		this.nativePlace = nativePlace;
-		this.currentPlace = currentPlace;
-		this.dosham = dosham;
-		this.marritalStatus = marritalStatus;
-		this.height = height;
-		this.details = details;
-		this.mobile = mobile;
-		this.createdDate = createdDate;
-		this.modifiedDate = modifiedDate;
-	}
-
+//    public UserInfo(String username, String email, String password, String firstName, String roles, String onBehalfOf,
+//			@NotEmpty @Size(max = 50, message = "Education must be max of 50 characters") String education,
+//			String gender, String fatherName, String motherName, String dob, String job, int income, String houseName,
+//			String branch, String temple, String femaleGod, String star, String zodiac, String nativePlace,
+//			String currentPlace, String dosham, String marritalStatus, String height,
+//			@Size(max = 1500, message = "Details must be max of 1500 characters") String details, String mobile,
+//			Date createdDate, Date modifiedDate) {
+//		super();
+//		this.name = name;
+//		this.email = email;
+//		this.password = password;
+//		this.firstName = firstName;
+//		this.roles = roles;
+//		this.onBehalfOf = onBehalfOf;
+//		this.education = education;
+//		this.gender = gender;
+//		this.fatherName = fatherName;
+//		this.motherName = motherName;
+//		this.dob = dob;
+//		this.job = job;
+//		this.income = income;
+//		this.houseName = houseName;
+//		this.branch = branch;
+//		this.temple = temple;
+//		this.femaleGod = femaleGod;
+//		this.star = star;
+//		this.zodiac = zodiac;
+//		this.nativePlace = nativePlace;
+//		this.currentPlace = currentPlace;
+//		this.dosham = dosham;
+//		this.marritalStatus = marritalStatus;
+//		this.height = height;
+//		this.details = details;
+//		this.mobile = mobile;
+//		this.createdDate = createdDate;
+//		this.modifiedDate = modifiedDate;
+//	}
+//
 
 	public void setCreatedDate(Date createdDate) {
 		this.createdDate = createdDate;
@@ -307,4 +324,44 @@ public class UserInfo {
 	public void setStar(String star) {
 		this.star = star;
 	}
+
+	public UserInfo(String name, String email, String password, String firstName, String roles, String onBehalfOf,
+			@NotEmpty @Size(max = 50, message = "Education must be max of 50 characters") String education,
+			Set<Photo> photos, String gender, String fatherName, String motherName, String dob, String job, int income,
+			String houseName, String branch, String temple, String femaleGod, String star, String zodiac,
+			String nativePlace, String currentPlace, String dosham, String marritalStatus, String height,
+			@Size(max = 1500, message = "Details must be max of 1500 characters") String details, String mobile,
+			Date createdDate, Date modifiedDate) {
+		super();
+		this.name = name;
+		this.email = email;
+		this.password = password;
+		this.firstName = firstName;
+		this.roles = roles;
+		this.onBehalfOf = onBehalfOf;
+		this.education = education;
+		this.photos = photos;
+		this.gender = gender;
+		this.fatherName = fatherName;
+		this.motherName = motherName;
+		this.dob = dob;
+		this.job = job;
+		this.income = income;
+		this.houseName = houseName;
+		this.branch = branch;
+		this.temple = temple;
+		this.femaleGod = femaleGod;
+		this.star = star;
+		this.zodiac = zodiac;
+		this.nativePlace = nativePlace;
+		this.currentPlace = currentPlace;
+		this.dosham = dosham;
+		this.marritalStatus = marritalStatus;
+		this.height = height;
+		this.details = details;
+		this.mobile = mobile;
+		this.createdDate = createdDate;
+		this.modifiedDate = modifiedDate;
+	}
+	
 } 
